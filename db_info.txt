@@ -1,0 +1,97 @@
+Database Name:- test_db
+Username:- postgres
+Password:- admin
+
+createdb --username=postgres test_db
+
+
+psql -U postgres -d test_db
+test_db=#
+--> SQL
+
+CREATE TABLE skills_table (
+    id serial PRIMARY KEY,           
+    resume_name VARCHAR(255),       
+    skills VARCHAR(255),                   
+    percentage INT 
+);
+
+-- Now, insert data into the modified table
+INSERT INTO skilld (resume_name, skills, percentage)
+VALUES
+    ('John Doe', 'Java, SQL, Python', 90),
+    ('Jane Smith', 'JavaScript, CSS, HTML', 85),
+    ('Bob Johnson', 'C++, Java, Python', 92);
+	
+
+CREATE TABLE skillt (
+    id serial PRIMARY KEY,           
+    resume_name VARCHAR(255),       
+    skills TEXT[],                   
+    percentage INT 
+);
+
+INSERT INTO skillt (resume_name, skills, percentage)
+VALUES
+    ('John Doe', ARRAY['Java', 'SQL', 'Python'], 90),
+    ('Jane Smith', ARRAY['JavaScript', 'CSS', 'HTML'], 85),
+    ('Bob Johnson', ARRAY['C++', 'Java', 'Python'], 92);
+	
+CREATE TABLE embeddings (
+    id serial PRIMARY KEY,
+    embedding double precision[]
+);
+
+CREATE OR REPLACE FUNCTION cosine_similarity(v1 double precision[], v2 double precision[])
+RETURNS double precision AS $$
+DECLARE
+    dot_product double precision;
+    norm_v1 double precision;
+    norm_v2 double precision;
+BEGIN
+    dot_product = (SELECT sum(v1[i] * v2[i]) FROM generate_series(1, array_length(v1, 1)) i);
+    norm_v1 = sqrt((SELECT sum(v1[i] * v1[i]) FROM generate_series(1, array_length(v1, 1)) i));
+    norm_v2 = sqrt((SELECT sum(v2[i] * v2[i]) FROM generate_series(1, array_length(v2, 1)) i));
+    IF norm_v1 = 0 OR norm_v2 = 0 THEN
+        RETURN 0;
+    ELSE
+        RETURN dot_product / (norm_v1 * norm_v2);
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
+
+
+
+Download PostGreSQL 
+
+Download pgAdmin
+
+https://www.pgadmin.org/download/
+
+Command
+pgxn install pgvector
+psql -U postgres -d test_db -c "CREATE EXTENSION pgvector;"
+createdb your_database
+SELECT vector_similarity(array[1, 2, 3], array[4, 5, 6]);
+
+
+CREATE OR REPLACE FUNCTION cosine_similarity(v1 double precision[], v2 double precision[])
+RETURNS double precision AS $$
+DECLARE
+    dot_product double precision;
+    norm_v1 double precision;
+    norm_v2 double precision;
+BEGIN
+    dot_product = (SELECT sum(v1[i] * v2[i]) FROM generate_series(1, array_length(v1, 1)) i);
+    norm_v1 = sqrt((SELECT sum(v1[i] * v1[i]) FROM generate_series(1, array_length(v1, 1)) i));
+    norm_v2 = sqrt((SELECT sum(v2[i] * v2[i]) FROM generate_series(1, array_length(v2, 1)) i));
+    IF norm_v1 = 0 OR norm_v2 = 0 THEN
+        RETURN 0;
+    ELSE
+        RETURN dot_product / (norm_v1 * norm_v2);
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
+
+
+Using Generative AI for this specific task is like using a sledgehammer to crack a nut. Generative AI models are better suited for more complex natural language understanding tasks, while simple string matching can be efficiently handled using traditional methods as demonstrated above.
