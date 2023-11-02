@@ -24,7 +24,7 @@ import java.util.Map;
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/rate")
 public class RateCodeController {
-    private final String apiKey = "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";
+    private final String apiKey = "12sk-pPQFkd4n0M18ao8Uw2dLT3BlbkFJC624vqg1LIu8g8uXpBwO";
     private final String apiUrl = "https://api.openai.com/v1/chat/completions";
     private final String model = "gpt-3.5-turbo";
 

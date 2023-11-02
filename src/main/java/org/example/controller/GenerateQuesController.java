@@ -75,7 +75,7 @@ public class GenerateQuesController {
     }
     public String openAiCodingQuestion(String skill) {
         String url = "https://api.openai.com/v1/chat/completions";
-        String apiKey = "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";
+        String apiKey = "12sk-pPQFkd4n0M18ao8Uw2dLT3BlbkFJC624vqg1LIu8g8uXpBwO";
         String model = "gpt-3.5-turbo";
         int retryCount = 0;
         int maxRetries = 3;
