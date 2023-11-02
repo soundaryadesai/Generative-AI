@@ -1,0 +1,6 @@
+.scrollable-container {
+    height: 100px; /* Adjust the height to your preference */
+    overflow: auto;
+    border: 1px solid  black; /* Add a border for clarity */
+    padding: 10px; /* Optional padding to create spacing around the text */
+  }
