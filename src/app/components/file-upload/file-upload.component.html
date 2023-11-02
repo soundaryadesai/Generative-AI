@@ -25,6 +25,9 @@
     </div>
     <button (click)="onUpload()" class="upload-button"><i class="fas fa-cloud-upload-alt"></i> Upload Files</button>
   </div>
+  <div *ngIf="isUploaded">
+    Successfully uploaded all documents
+  </div>
 
   <div>
     <button class="ProcessButton" (click)="onProcess()"><i class="fa-solid fa-gears"></i> Classify Candidates</button>
@@ -45,9 +48,9 @@
           <tr *ngFor="let data of CvResult; index as i">
             <td>{{data?.resumeName}}</td>
             <td>{{data?.percentageMatch}}</td>
-            <td><span *ngIf="data!.percentageMatch>49"> Selected </span> <span
+            <td><span *ngIf="data!.percentageMatch>50"> Selected </span> <span
                 *ngIf="data!.percentageMatch<50"> Not selected </span></td>
-             <button *ngIf="data!.percentageMatch>39" (click)="newPage(i)">
+             <button *ngIf="data!.percentageMatch>50" (click)="newPage(i)">
               Test Link
              </button>   
           </tr>

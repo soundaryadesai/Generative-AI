@@ -17,11 +17,13 @@ export class FileUploadComponent implements OnInit {
   filesCv: File[] = [];
   isJdUploaded:boolean=false;
   isCvUploaded:boolean=false;
-  CvResult: CvDetails[]=[{resumeName: "xyz", percentageMatch : 23}];
+  CvResult: CvDetails[]=[];
+  isUploaded:boolean=false;
 
   constructor(private http: HttpClient , private uploadService: FileUploadService,private router: Router) {}
 
   ngOnInit(): void {
+    this.isUploaded=false;
   }
 
   onChangeJd(event: any) {
@@ -81,6 +83,7 @@ export class FileUploadComponent implements OnInit {
       uploadCv$.subscribe({
         next: () => {
           this.status = "success";
+          this.isUploaded=true;
         },
         error: (error: any) => {
           this.status = "fail";

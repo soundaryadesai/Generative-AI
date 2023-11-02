@@ -15,7 +15,7 @@ export class TestComponent {
   question:String="";
   skill:String="";
   editorOptions = {theme: 'vs-dark', language: 'javascript'};
-  code: string= 'function x() {\nconsole.log("Hello world!");\n}';
+  code: string= '//Please type code here';
   codeResult:String="";
   result:boolean=false;
   parts: string[] = [];
