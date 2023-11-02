@@ -1,0 +1,54 @@
+<head>
+  <link rel="stylesheet" type="text/css" href="file-upload.component.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+</head>
+
+<body style="background-color:  rgb(192, 226, 234)">
+  <br>
+  <div class="card-container">
+    <div>
+      <strong>Upload Job Description</strong>
+      <label style="margin-left: 30px;"><i class="fa-solid fa-file" style="color: #ffffff;"></i> &nbsp; Select file
+        <input type="file" class="file-input" (change)="onChangeJd($event)" /></label>
+      <div style="font-size: smaller; text-align: right;" *ngIf="this.filesJd.length">(Selected File:
+        {{this.filesJd[0].name}})</div>
+    </div> <br>
+    <div>
+      <strong>Upload Curriculum vitae</strong>
+      <label style="margin-left: 30px;"><i class="fa-solid fa-folder-tree" style="color: #ffffff;"></i> Select file's
+        <input type="file" class="file-input" multiple (change)="onChangeCv($event)" /></label>
+      <div style="max-height: 100px; overflow-y: scroll;" *ngIf="filesCv.length">
+        <div *ngFor="let file of filesCv">
+          <div style="font-size: smaller; text-align: right;">{{file.name}}</div>
+        </div>
+      </div>
+    </div>
+    <button (click)="onUpload()" class="upload-button"><i class="fas fa-cloud-upload-alt"></i> Upload Files</button>
+  </div>
+
+  <div>
+    <button class="ProcessButton" (click)="onProcess()"><i class="fa-solid fa-gears"></i> Classify Candidates</button>
+  </div>
+  <br>
+  <div class="card-container" *ngIf="CvResult.length">
+    <div>
+      <table style="width: 100%;">
+        <thead style="border-bottom: 1px solid black;">
+          <tr>
+            <th>Resume Name</th>
+            <th>Match Percentage</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of CvResult">
+            <td>{{data?.resumeName}}</td>
+            <td>{{data?.percentageMatch}}</td>
+            <td><span *ngIf="data!.percentageMatch>49"> <a href="">Link</a> </span> <span
+                *ngIf="data!.percentageMatch<50"> Not selected </span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
